@@ -14,23 +14,35 @@ import RequireAuth from './Pages/Login/RequireAuth/RequireAuth';
 function App() {
   return (
     <div className='App'>
-        <Header/>
-        <Routes>
-           <Route path='/' element={<Home/>}></Route>
-           <Route path='/home' element={<Home/>}></Route>
-           <Route path='/service/:serviceId' element={<ServiceDetail/>}></Route>
-           <Route path='/about' element={<About/>}></Route>
-           <Route path='/footer' element={<Footer/>}></Route>
-           <Route path='/login' element={<Login/>}></Route>
-           <Route path='/register' element={<Register/>}></Route>
-           <Route path='/checkout' element={
-             <RequireAuth>
-                <Checkout></Checkout>
-             </RequireAuth>
-           }></Route>
-           <Route path='*' element={<NotFound/>}></Route>
-        </Routes>
-        <Footer></Footer>
+      <Header />
+      <Routes>
+       {/*
+         <Route path='/' element={
+          <RequireAuth>
+            <Home></Home>
+          </RequireAuth>
+        }></Route>
+
+        <Route path='/home' element={
+          <RequireAuth>
+            <Home></Home>
+          </RequireAuth>
+        }></Route> */}
+        <Route  path='/' element={<Home></Home>}></Route>
+        <Route  path='/home' element={<Home></Home>}></Route>
+        <Route path='/service/:serviceId' element={<ServiceDetail />}></Route>
+        <Route path='/about' element={<About />}></Route>
+        <Route path='/footer' element={<Footer />}></Route>
+        <Route path='/login' element={<Login />}></Route>
+        <Route path='/register' element={<Register />}></Route>
+        <Route path='/checkout' element={
+          <RequireAuth>
+            <Checkout></Checkout>
+          </RequireAuth>
+        }></Route>
+        <Route path='*' element={<NotFound />}></Route>
+      </Routes>
+      <Footer></Footer>
     </div>
   );
 }
