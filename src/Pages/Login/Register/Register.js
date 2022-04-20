@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import './Register.css'
 import SocialLogin from '../SocialLogin/SocialLogin';
+import PageTitle from '../../Shared/PageTitle/PageTitle';
+
 
 const Register = () => {
     const [agree, setAgree] = useState(false);
@@ -12,35 +14,44 @@ const Register = () => {
         user,
         loading,
         error,
-    ] = useCreateUserWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth,{sendEmailVerification: true});
+    //sendEmailVerification টা ৬২.৭ এ এড করা হয়েছে। 
+    const [updateProfile, updating, upadateError] = useUpdateProfile(auth);
 
     const navigate = useNavigate();
-    
     const navigateLogin = () => {
         navigate('/login')
     }
     if(user){
-        navigate('/home');
+        console.log('user',user);
     }
-    const handleRegister = event => {
+    const handleRegister = async (event) => {
+        // async টা ৬২.৭ এ এড করা হয়েছে। 
         event.preventDefault();
         const name = event.target.name.value;
         const email = event.target.email.value;
         const password = event.target.password.value;
-        if(agree){
+       await createUserWithEmailAndPassword(email, password);
+       await updateProfile({ displayName :name});
+          console.log('Updated profile',user);
+          navigate('/home');
+        /*
+         if(agree){
             createUserWithEmailAndPassword(email, password);
-        }
-        /* Or- 
+        } 
+        Or- 
         const agree = event.target.terms.checked;
         if(agree){
             createUserWithEmailAndPassword(email, password);
         } 
+        দুটোই বাতিল করা হয়েছে কারণ , চেকড না করলে বাটনকেই ডিজেবল করা হয়েছে। 
         */
               
     }
 
     return (
         <div className='register-form'>
+            <PageTitle title="Register"></PageTitle>
             <h2 style={{ textAlign: 'center' }}>Please Register</h2>
             <form onSubmit={handleRegister}>
                 <input type="text" name='' id='' placeholder='Your Name' />

@@ -25,6 +25,7 @@ const SocialLogin = () => {
     }
     if (loading || loading2) {
         Loading = <p className='text-primary'> তোমার পেজ প্রসেসিং করা হচ্ছে <span className='text-danger'>একটু অপেক্ষা কর। </span></p>;
+        // return <loading></loading> এখানে কম্পোনেন্ট আসেনি
     }
     if (user || user2) {
         navigate('/home');
@@ -32,6 +33,7 @@ const SocialLogin = () => {
 
     return (
         <div>
+            
             <div className='d-flex align-items-center'>
                 <div style={{ height: '1px' }} className='bg-primary w-50'></div>
                 <p className='mt-2 px-2'>Or</p>
