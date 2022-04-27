@@ -4,8 +4,14 @@ import './services.css'
 
 const Services = () => {
     const [services, setServices] = useState([]);
-    useEffect(() => {
+/*     useEffect(() => {
         fetch('services.json')
+            .then(res => res.json())
+            .then(data => setServices(data));
+    }, []) */
+    //after mondodb server
+    useEffect(() => {
+        fetch('http://localhost:5000/zakhushi')
             .then(res => res.json())
             .then(data => setServices(data));
     }, [])
